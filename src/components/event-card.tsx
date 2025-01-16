@@ -11,6 +11,7 @@ interface EventCardProps {
   time: string;
   link: string;
   imageUrl?: string;
+  tags?: string[];
 }
 
 export default function EventCard({
@@ -21,6 +22,7 @@ export default function EventCard({
   time,
   imageUrl,
   link,
+  tags,
 }: EventCardProps) {
   return (
     <Card className="overflow-hidden">
@@ -34,7 +36,15 @@ export default function EventCard({
         </div>
       )}
       <CardContent className="p-6">
-        <div className="text-blue-600 font-medium text-sm mb-4">{type}</div>
+        {tags && tags.length > 0 && (
+          <div className="flex flex-wrap gap-2 mb-4">
+            {tags.map((tag, index) => (
+              <span key={index} className="text-blue-600 font-medium text-sm">
+                {tag}
+              </span>
+            ))}
+          </div>
+        )}
         <h2 className="text-xl font-semibold mb-4 text-gray-900">{title}</h2>
         <div className="space-y-3 mb-6">
           <div className="flex items-center gap-2 text-gray-600">

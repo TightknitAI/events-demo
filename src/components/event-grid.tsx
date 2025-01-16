@@ -1,5 +1,12 @@
 import EventCard from "./event-card";
 
+export type Tag = {
+  id: string;
+  created_at: string;
+  tag_group_id: string;
+  label: string;
+};
+
 export type Event = {
   // Basic info
   id: string;
@@ -42,6 +49,8 @@ export type Event = {
   // People
   hosts: string[];
   speakers: string[];
+
+  tags: Tag[];
 };
 
 export default function EventGrid({ events }: { events: Event[] }) {
@@ -61,6 +70,7 @@ export default function EventGrid({ events }: { events: Event[] }) {
             })}
             imageUrl={event.cover_image_url}
             link={event.link}
+            tags={event.tags.map((tag) => tag.label)}
           />
         ))}
       </div>
