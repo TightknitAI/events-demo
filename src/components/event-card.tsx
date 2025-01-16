@@ -4,7 +4,6 @@ import { Calendar, MapPin } from "lucide-react";
 import Link from "next/link";
 
 interface EventCardProps {
-  type: "WIZ HOSTED EVENT" | "LIVE WEBINAR" | "SPONSORED BY WIZ";
   title: string;
   location: string;
   date: string;
@@ -15,7 +14,6 @@ interface EventCardProps {
 }
 
 export default function EventCard({
-  type,
   title,
   location,
   date,
