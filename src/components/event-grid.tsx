@@ -60,7 +60,6 @@ export default function EventGrid({ events }: { events: Event[] }) {
         {events.map((event) => (
           <EventCard
             key={event.id}
-            type="WIZ HOSTED EVENT"
             title={event.title}
             location={event.location}
             date={new Date(event.start_date).toLocaleDateString()}
