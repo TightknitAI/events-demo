@@ -15,6 +15,7 @@ export default async function Home() {
         Authorization: `Bearer ${process.env.TIGHTKNIT_API_KEY}`,
         "Content-Type": "application/json",
       },
+      cache: "no-store",
     }
   );
 
