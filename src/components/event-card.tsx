@@ -8,7 +8,7 @@ interface EventCardProps {
   location: string;
   date: string;
   time: string;
-  link: string;
+  link?: string;
   imageUrl?: string;
   tags?: string[];
 }
@@ -54,16 +54,18 @@ export default function EventCard({
             <span>{`${date}, ${time}`}</span>
           </div>
         </div>
-        <Link
-          href={link}
-          className={buttonVariants({
-            variant: "outline",
-            className: "text-blue-600 border-blue-600 hover:bg-blue-50",
-          })}
-        >
-          Register
-          <span className="ml-2">→</span>
-        </Link>
+        {link && (
+          <Link
+            href={link}
+            className={buttonVariants({
+              variant: "outline",
+              className: "text-blue-600 border-blue-600 hover:bg-blue-50",
+            })}
+          >
+            Register
+            <span className="ml-2">→</span>
+          </Link>
+        )}
       </CardContent>
     </Card>
   );

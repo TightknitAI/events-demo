@@ -54,6 +54,14 @@ export type Event = {
 };
 
 export default function EventGrid({ events }: { events: Event[] }) {
+  if (!events || events.length === 0) {
+    return (
+      <div className="container mx-auto p-6 text-center">
+        <p className="text-lg text-gray-600">No events found.</p>
+      </div>
+    );
+  }
+
   return (
     <div className="container mx-auto p-6">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
