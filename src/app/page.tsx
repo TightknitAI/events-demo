@@ -3,7 +3,7 @@ import EventGrid, { Event } from "@/components/event-grid";
 export default async function Home() {
   const params = new URLSearchParams({
     page: "0",
-    per_page: "100",
+    per_page: "10",
     time_filter: "upcoming",
     status: "published",
     // published_to_site: "true",
@@ -11,7 +11,7 @@ export default async function Home() {
   });
 
   const response = await fetch(
-    `https://staging-api.tightknit.dev/admin/v0/calendar_events?${params}`,
+    `https://api.tightknit.dev/admin/v0/calendar_events?${params}`,
     {
       headers: {
         Authorization: `Bearer ${process.env.TIGHTKNIT_API_KEY}`,
@@ -22,7 +22,31 @@ export default async function Home() {
   );
 
   if (!response.ok) {
-    return <div>Error: {response.statusText}</div>;
+    // Get the error details from the response
+    const errorText = await response.text();
+    console.error("API Error:", {
+      status: response.status,
+      statusText: response.statusText,
+      url: response.url,
+      errorDetails: errorText,
+    });
+
+    return (
+      <div className="p-8 max-w-lg mx-auto mt-10 bg-red-50 border border-red-200 rounded-lg">
+        <h2 className="text-xl font-bold text-red-700 mb-2">API Error</h2>
+        <p className="mb-2">
+          <strong>Status:</strong> {response.status} ({response.statusText})
+        </p>
+        <p className="mb-4">
+          <strong>URL:</strong> {response.url}
+        </p>
+        <div className="p-3 bg-white rounded border border-red-100">
+          <p className="font-mono text-sm break-all whitespace-pre-wrap">
+            {errorText}
+          </p>
+        </div>
+      </div>
+    );
   }
 
   const { data } = await response.json();
